@@ -6,6 +6,7 @@
 // file that was distributed with this source code.
 
 // spell-checker:ignore manpages mangen
+mustang::can_run_this!();
 
 use clap::{Arg, Command};
 use clap_complete::Shell;

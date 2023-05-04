@@ -263,6 +263,7 @@ feat_os_windows_legacy = [
 test = [ "uu_test" ]
 
 [workspace.dependencies]
+mustang = "0.8.13"
 bigdecimal = "0.3"
 binary-heap-plus = "0.5.0"
 bstr = "1.4"
@@ -301,7 +302,6 @@ num-bigint = "0.4.3"
 num-traits = "0.2.15"
 number_prefix = "0.4"
 once_cell = "1.17.1"
-onig = { version = "~6.4", default-features = false }
 ouroboros = "0.15.6"
 phf = "0.11.1"
 phf_codegen = "0.11.1"
@@ -339,7 +339,7 @@ sha1 = "0.10.5"
 sha2 = "0.10.6"
 sha3 = "0.10.8"
 blake2b_simd = "1.0.1"
-blake3 = "1.3.3"
+blake3 = { version = "1.3.3", default-features = false, features = [ "no_neon" ] }
 sm3 = "0.4.1"
 digest = "0.10.6"
 
@@ -349,6 +349,7 @@ uu_ls = { version=">=0.0.18", path="src/uu/ls" }
 uu_base32 = { version=">=0.0.18", path="src/uu/base32"}
 
 [dependencies]
+mustang = { workspace=true }
 clap = { workspace=true }
 once_cell = { workspace=true }
 uucore = { workspace=true }
@@ -515,12 +516,6 @@ name = "uudoc"
 path = "src/bin/uudoc.rs"
 required-features = ["uudoc"]
 
-# The default release profile. It contains all optimizations, without
-# sacrificing debug info. With this profile (like in the standard
-# release profile), the debug info and the stack traces will still be available.
-[profile.release]
-lto = true
-
 # A release-like profile that is tuned to be fast, even when being fast
 # compromises on binary size. This includes aborting on panic.
 [profile.release-fast]
@@ -533,3 +528,4 @@ inherits = "release"
 opt-level = "z"
 panic = "abort"
 strip = true
+codegen-units = 1
